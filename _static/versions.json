@@ -1,4 +1,4 @@
 {
-    "development": "rtdl/dev",
-    "stable": "rtdl"
+    "development": "dev",
+    "stable": ""
 }
