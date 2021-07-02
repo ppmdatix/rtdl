@@ -1,8 +1,0 @@
-﻿rtdl.NumericalFeatureTokenizer
-==============================
-
-.. currentmodule:: rtdl
-
-.. autoclass:: NumericalFeatureTokenizer
-   :special-members: __init__
-   :members:

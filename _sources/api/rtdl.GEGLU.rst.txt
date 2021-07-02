@@ -1,8 +1,0 @@
-﻿rtdl.GEGLU
-==========
-
-.. currentmodule:: rtdl
-
-.. autoclass:: GEGLU
-   :special-members: __init__
-   :members:

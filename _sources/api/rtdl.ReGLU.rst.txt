@@ -1,8 +1,0 @@
-﻿rtdl.ReGLU
-==========
-
-.. currentmodule:: rtdl
-
-.. autoclass:: ReGLU
-   :special-members: __init__
-   :members:

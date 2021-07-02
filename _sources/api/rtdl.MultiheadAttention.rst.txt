@@ -1,8 +1,0 @@
-﻿rtdl.MultiheadAttention
-=======================
-
-.. currentmodule:: rtdl
-
-.. autoclass:: MultiheadAttention
-   :special-members: __init__
-   :members:

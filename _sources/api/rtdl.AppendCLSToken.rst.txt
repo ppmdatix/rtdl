@@ -1,8 +1,0 @@
-﻿rtdl.AppendCLSToken
-===================
-
-.. currentmodule:: rtdl
-
-.. autoclass:: AppendCLSToken
-   :special-members: __init__
-   :members:
