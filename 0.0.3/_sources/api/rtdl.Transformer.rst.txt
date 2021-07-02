@@ -1,0 +1,8 @@
+﻿rtdl.Transformer
+================
+
+.. currentmodule:: rtdl
+
+.. autoclass:: Transformer
+   :special-members: __init__
+   :members:
