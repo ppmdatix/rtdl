@@ -47,7 +47,7 @@
   
   
   
-    <title>rtdl.modules &#8212; rtdl 0.0.4.dev0 documentation</title>
+    <title>rtdl.modules &#8212; rtdl 0.0.5.dev0 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/material.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -79,7 +79,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../index.html" title="rtdl 0.0.4.dev0 documentation"
+        <a href="../../index.html" title="rtdl 0.0.5.dev0 documentation"
            class="md-header-nav__button md-logo">
           
             <i class="md-icon">&#127968;</i>
@@ -91,7 +91,7 @@
       </div>
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          <span class="md-header-nav__topic">rtdl 0.0.4.dev0</span>
+          <span class="md-header-nav__topic">rtdl 0.0.5.dev0</span>
           <span class="md-header-nav__topic"> rtdl.modules </span>
         </div>
       </div>
@@ -177,13 +177,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../../index.html" title="rtdl 0.0.4.dev0 documentation" class="md-nav__button md-logo">
+    <a href="../../index.html" title="rtdl 0.0.5.dev0 documentation" class="md-nav__button md-logo">
       
         <i class="md-icon">&#127968;</i>
       
     </a>
     <a href="../../index.html"
-       title="rtdl 0.0.4.dev0 documentation">rtdl 0.0.4.dev0</a>
+       title="rtdl 0.0.5.dev0 documentation">rtdl 0.0.5.dev0</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/yandex-research/rtdl" title="Go to repository" class="md-source" data-md-source="github">
@@ -411,7 +411,8 @@
         <span class="k">assert</span> <span class="n">d_token</span> <span class="o">&gt;</span> <span class="mi">0</span>
         <span class="n">initialization_</span> <span class="o">=</span> <span class="n">_TokenInitialization</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="n">initialization</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">category_offsets</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">cardinalities</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">category_offsets</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">cardinalities</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">'category_offsets'</span><span class="p">,</span> <span class="n">category_offsets</span><span class="p">,</span> <span class="n">persistent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">cardinalities</span><span class="p">),</span> <span class="n">d_token</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">Tensor</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cardinalities</span><span class="p">),</span> <span class="n">d_token</span><span class="p">))</span> <span class="k">if</span> <span class="n">bias</span> <span class="k">else</span> <span class="kc">None</span>
 
