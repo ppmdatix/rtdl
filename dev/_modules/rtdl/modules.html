@@ -47,7 +47,7 @@
   
   
   
-    <title>rtdl.modules &#8212; rtdl 0.0.5.dev0 documentation</title>
+    <title>rtdl.modules &#8212; rtdl 0.0.6.dev0 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/material.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -79,7 +79,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../index.html" title="rtdl 0.0.5.dev0 documentation"
+        <a href="../../index.html" title="rtdl 0.0.6.dev0 documentation"
            class="md-header-nav__button md-logo">
           
             <i class="md-icon">&#127968;</i>
@@ -91,7 +91,7 @@
       </div>
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          <span class="md-header-nav__topic">rtdl 0.0.5.dev0</span>
+          <span class="md-header-nav__topic">rtdl 0.0.6.dev0</span>
           <span class="md-header-nav__topic"> rtdl.modules </span>
         </div>
       </div>
@@ -177,13 +177,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../../index.html" title="rtdl 0.0.5.dev0 documentation" class="md-nav__button md-logo">
+    <a href="../../index.html" title="rtdl 0.0.6.dev0 documentation" class="md-nav__button md-logo">
       
         <i class="md-icon">&#127968;</i>
       
     </a>
     <a href="../../index.html"
-       title="rtdl 0.0.5.dev0 documentation">rtdl 0.0.5.dev0</a>
+       title="rtdl 0.0.6.dev0 documentation">rtdl 0.0.6.dev0</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/yandex-research/rtdl" title="Go to repository" class="md-source" data-md-source="github">
@@ -603,7 +603,6 @@
 <span class="sd">            only if you are sure that you need it.</span>
 <span class="sd">        """</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="n">d_layers</span> <span class="ow">or</span> <span class="n">d_out</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dropouts</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="n">dropouts</span> <span class="o">=</span> <span class="p">[</span><span class="n">dropouts</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">d_layers</span><span class="p">)</span>
         <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">d_layers</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">dropouts</span><span class="p">)</span>
@@ -626,10 +625,7 @@
     <span class="k">def</span> <span class="nf">make_baseline</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="s1">'MLP'</span><span class="p">],</span>
         <span class="n">d_in</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">d_first</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-        <span class="n">d_intermidiate</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-        <span class="n">d_last</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-        <span class="n">n_blocks</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">d_layers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
         <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">d_out</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'MLP'</span><span class="p">:</span>
@@ -639,15 +635,11 @@
 <span class="sd">        convenient for tuning; it was used in the original paper.</span>
 <span class="sd">        """</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dropout</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">d_first</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">d_last</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">d_intermidiate</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]:</span>
-            <span class="k">assert</span> <span class="p">(</span><span class="n">n_blocks</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="n">d</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="n">d_layers</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="n">n_blocks</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">d_layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_first</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">n_blocks</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="n">d_layers</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">d_intermidiate</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_blocks</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">n_blocks</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">d_layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_last</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d_layers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">d_layers</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span>
+                <span class="s1">'if d_layers contains more than two elements, then'</span>
+                <span class="s1">' all elements except for the first and the last ones must be equal.'</span>
+            <span class="p">)</span>
         <span class="k">return</span> <span class="n">MLP</span><span class="p">(</span>
             <span class="n">d_in</span><span class="o">=</span><span class="n">d_in</span><span class="p">,</span>
             <span class="n">d_layers</span><span class="o">=</span><span class="n">d_layers</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
