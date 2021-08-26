@@ -365,10 +365,10 @@ in the original paper.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>d_in</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the input dimension</p></li>
 <li><p><strong>d_layers</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – the dimensions of the hidden layers. If there are more than two
-hidden layers, then the all of them except for the first and the last
-ones must have the dimension. Correct examples: <code class="code docutils literal notranslate"><span class="pre">[]</span></code>, <code class="code docutils literal notranslate"><span class="pre">[8]</span></code>,
-<code class="code docutils literal notranslate"><span class="pre">[8,</span> <span class="pre">16]</span></code>, <code class="code docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">2,</span> <span class="pre">2,</span> <span class="pre">2]</span></code>, <code class="code docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">2,</span> <span class="pre">4]</span></code>. Incorrect
-examples: <code class="code docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4]</span></code>.</p></li>
+hidden layers, then all of them except for the first and the last
+ones must have the same dimension. Valid examples: <code class="code docutils literal notranslate"><span class="pre">[]</span></code>,
+<code class="code docutils literal notranslate"><span class="pre">[8]</span></code>, <code class="code docutils literal notranslate"><span class="pre">[8,</span> <span class="pre">16]</span></code>, <code class="code docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">2,</span> <span class="pre">2,</span> <span class="pre">2]</span></code>,
+<code class="code docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">2,</span> <span class="pre">4]</span></code>. Invalid examples: <code class="code docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4]</span></code>.</p></li>
 <li><p><strong>dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – the dropout rate for all hidden layers</p></li>
 <li><p><strong>d_out</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the output dimension</p></li>
 </ul>
