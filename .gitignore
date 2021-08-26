@@ -166,5 +166,7 @@ output/**/*.*
 
 # Other
 .DS_Store
+.vscode
+local/
 draft/
 yandex/

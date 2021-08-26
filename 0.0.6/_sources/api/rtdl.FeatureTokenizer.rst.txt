@@ -1,0 +1,8 @@
+﻿rtdl.FeatureTokenizer
+=====================
+
+.. currentmodule:: rtdl
+
+.. autoclass:: FeatureTokenizer
+   :special-members: __init__
+   :members:
