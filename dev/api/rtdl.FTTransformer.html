@@ -47,7 +47,7 @@
   
   
   
-    <title>rtdl.FTTransformer &#8212; rtdl 0.0.6.dev0 documentation</title>
+    <title>rtdl.FTTransformer &#8212; rtdl 0.0.7.dev0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/material.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -80,7 +80,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../index.html" title="rtdl 0.0.6.dev0 documentation"
+        <a href="../index.html" title="rtdl 0.0.7.dev0 documentation"
            class="md-header-nav__button md-logo">
           
             <i class="md-icon">&#127968;</i>
@@ -92,7 +92,7 @@
       </div>
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          <span class="md-header-nav__topic">rtdl 0.0.6.dev0</span>
+          <span class="md-header-nav__topic">rtdl 0.0.7.dev0</span>
           <span class="md-header-nav__topic"> rtdl.FTTransformer </span>
         </div>
       </div>
@@ -178,13 +178,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../index.html" title="rtdl 0.0.6.dev0 documentation" class="md-nav__button md-logo">
+    <a href="../index.html" title="rtdl 0.0.7.dev0 documentation" class="md-nav__button md-logo">
       
         <i class="md-icon">&#127968;</i>
       
     </a>
     <a href="../index.html"
-       title="rtdl 0.0.6.dev0 documentation">rtdl 0.0.6.dev0</a>
+       title="rtdl 0.0.7.dev0 documentation">rtdl 0.0.7.dev0</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/yandex-research/rtdl" title="Go to repository" class="md-source" data-md-source="github">
@@ -333,7 +333,7 @@ constructors. Use <a class="reference internal" href="#rtdl.FTTransformer.__init
 </dd></dl>
 <dl class="py method">
 <dt id="rtdl.FTTransformer.make_baseline">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">make_baseline</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_num_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat_cardinalities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_blocks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_d_intermidiate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residual_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_layer_query_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_sharing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#FTTransformer.make_baseline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.FTTransformer.make_baseline" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">make_baseline</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_num_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat_cardinalities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_blocks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_d_hidden</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residual_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_layer_query_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_sharing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#FTTransformer.make_baseline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.FTTransformer.make_baseline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a “baseline” <a class="reference internal" href="#rtdl.FTTransformer" title="rtdl.FTTransformer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FTTransformer</span></code></a>.</p>
 <p>It is a user-friendly alternative to <a class="reference internal" href="#rtdl.FTTransformer.__init__" title="rtdl.FTTransformer.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>. This variation of
 FT-Transformer was used in the original paper.</p>
@@ -345,8 +345,8 @@ FT-Transformer was used in the original paper.</p>
 <li><p><strong>d_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
 <li><p><strong>n_blocks</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
 <li><p><strong>attention_dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – </p></li>
-<li><p><strong>ffn_d_intermidiate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
-<li><p><strong>ffn_dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
+<li><p><strong>ffn_d_hidden</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
+<li><p><strong>ffn_dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – </p></li>
 <li><p><strong>residual_dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – </p></li>
 <li><p><strong>last_layer_query_idx</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#slice" title="(in Python v3.9)"><em>slice</em></a><em>]</em>) – </p></li>
 <li><p><strong>kv_compression_ratio</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>]</em>) – </p></li>
@@ -363,7 +363,7 @@ FT-Transformer was used in the original paper.</p>
 <dt id="rtdl.FTTransformer.make_default">
 <em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">make_default</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_num_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cat_cardinalities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_blocks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_layer_query_idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_sharing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#FTTransformer.make_default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.FTTransformer.make_default" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the default <a class="reference internal" href="#rtdl.FTTransformer" title="rtdl.FTTransformer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FTTransformer</span></code></a>.</p>
-<p>With <code class="code docutils literal notranslate"><span class="pre">n_blocks=3</span></code> (default) it is the FT-Transformer variation that
+<p>With <code class="code docutils literal notranslate"><span class="pre">n_blocks=3</span></code> (default) it is the FT-Transformer variation that is
 referred to as “default FT-Transformer” in the original paper.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

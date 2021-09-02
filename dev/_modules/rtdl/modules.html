@@ -47,7 +47,7 @@
   
   
   
-    <title>rtdl.modules &#8212; rtdl 0.0.6.dev0 documentation</title>
+    <title>rtdl.modules &#8212; rtdl 0.0.7.dev0 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/material.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -79,7 +79,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../index.html" title="rtdl 0.0.6.dev0 documentation"
+        <a href="../../index.html" title="rtdl 0.0.7.dev0 documentation"
            class="md-header-nav__button md-logo">
           
             <i class="md-icon">&#127968;</i>
@@ -91,7 +91,7 @@
       </div>
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          <span class="md-header-nav__topic">rtdl 0.0.6.dev0</span>
+          <span class="md-header-nav__topic">rtdl 0.0.7.dev0</span>
           <span class="md-header-nav__topic"> rtdl.modules </span>
         </div>
       </div>
@@ -177,13 +177,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../../index.html" title="rtdl 0.0.6.dev0 documentation" class="md-nav__button md-logo">
+    <a href="../../index.html" title="rtdl 0.0.7.dev0 documentation" class="md-nav__button md-logo">
       
         <i class="md-icon">&#127968;</i>
       
     </a>
     <a href="../../index.html"
-       title="rtdl 0.0.6.dev0 documentation">rtdl 0.0.6.dev0</a>
+       title="rtdl 0.0.7.dev0 documentation">rtdl 0.0.7.dev0</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/yandex-research/rtdl" title="Go to repository" class="md-source" data-md-source="github">
@@ -521,20 +521,59 @@
         <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="AppendCLSToken"><a class="viewcode-back" href="../../api/rtdl.AppendCLSToken.html#rtdl.AppendCLSToken">[docs]</a><span class="k">class</span> <span class="nc">AppendCLSToken</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="sd">"""Appends the [CLS] token for BERT-like inference."""</span>
+<div class="viewcode-block" id="CLSToken"><a class="viewcode-back" href="../../api/rtdl.CLSToken.html#rtdl.CLSToken">[docs]</a><span class="k">class</span> <span class="nc">CLSToken</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">"""[CLS]-token for BERT-like inference.</span>
 
-<div class="viewcode-block" id="AppendCLSToken.__init__"><a class="viewcode-back" href="../../api/rtdl.AppendCLSToken.html#rtdl.AppendCLSToken.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d_token</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">initialization</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="sd">    .. rubric:: Tutorial</span>
+
+<span class="sd">    When used as a module, the [CLS]-token is appended **to the end** of each item in</span>
+<span class="sd">    the batch:</span>
+
+<span class="sd">    .. testcode::</span>
+
+<span class="sd">        batch_size = 2</span>
+<span class="sd">        n_tokens = 3</span>
+<span class="sd">        d_token = 4</span>
+<span class="sd">        cls_token = CLSToken(d_token, 'uniform')</span>
+<span class="sd">        x = torch.randn(batch_size, n_tokens, d_token)</span>
+<span class="sd">        x = cls_token(x)</span>
+<span class="sd">        assert x.shape == (batch_size, n_tokens + 1, d_token)</span>
+<span class="sd">        assert (x[:, -1, :] == cls_token.expand(len(x))).all()</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="CLSToken.__init__"><a class="viewcode-back" href="../../api/rtdl.CLSToken.html#rtdl.CLSToken.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d_token</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">initialization</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Initialize self."""</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="n">initialization_</span> <span class="o">=</span> <span class="n">_TokenInitialization</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="n">initialization</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">Tensor</span><span class="p">(</span><span class="n">d_token</span><span class="p">))</span>
         <span class="n">initialization_</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">d_token</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AppendCLSToken.forward"><a class="viewcode-back" href="../../api/rtdl.AppendCLSToken.html#rtdl.AppendCLSToken.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-        <span class="sd">"""Perform the forward pass."""</span>
-        <span class="k">assert</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span>
-        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div></div>
+<div class="viewcode-block" id="CLSToken.expand"><a class="viewcode-back" href="../../api/rtdl.CLSToken.html#rtdl.CLSToken.expand">[docs]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">leading_dimensions</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">"""Expand (repeat) the underlying [CLS]-token to a tensor with the given leading dimensions.</span>
+
+<span class="sd">        A possible use case is building a batch of [CLS]-tokens. See `CLSToken` for</span>
+<span class="sd">        examples of usage.</span>
+
+<span class="sd">        Note:</span>
+
+<span class="sd">            Under the hood, the `torch.Tensor.expand` method is applied to the</span>
+<span class="sd">            underlying :code:`weight` parameter, so gradients will be propagated as</span>
+<span class="sd">            expected.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            leading_dimensions: the additional new dimensions</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tensor of the shape :code:`(*leading_dimensions, len(self.weight))`</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">leading_dimensions</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span>
+        <span class="n">new_dims</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">leading_dimensions</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">*</span><span class="n">new_dims</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">*</span><span class="n">leading_dimensions</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CLSToken.forward"><a class="viewcode-back" href="../../api/rtdl.CLSToken.html#rtdl.CLSToken.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">"""Append self **to the end** of each item in the batch (see `CLSToken`)."""</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div></div>
 
 
 <span class="k">def</span> <span class="nf">_make_nn_module</span><span class="p">(</span><span class="n">module_type</span><span class="p">:</span> <span class="n">ModuleType</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span>
@@ -631,8 +670,21 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'MLP'</span><span class="p">:</span>
         <span class="sd">"""Create a "baseline" `MLP`.</span>
 
-<span class="sd">        It is a user-friendly alternative to `__init__`. This variation of MLP is also</span>
-<span class="sd">        convenient for tuning; it was used in the original paper.</span>
+<span class="sd">        It is a user-friendly alternative to `__init__`. This variation of MLP was used</span>
+<span class="sd">        in the original paper.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            d_in: the input dimension</span>
+<span class="sd">            d_layers: the dimensions of the hidden layers. If there are more than two</span>
+<span class="sd">                hidden layers, then all of them except for the first and the last</span>
+<span class="sd">                ones must have the same dimension. Valid examples: :code:`[]`,</span>
+<span class="sd">                :code:`[8]`, :code:`[8, 16]`, :code:`[2, 2, 2, 2]`,</span>
+<span class="sd">                :code:`[1, 2, 2, 4]`. Invalid examples: :code:`[1, 2, 3, 4]`.</span>
+<span class="sd">            dropout: the dropout rate for all hidden layers</span>
+<span class="sd">            d_out: the output dimension</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            MLP</span>
 <span class="sd">        """</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dropout</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d_layers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
@@ -670,7 +722,7 @@
             <span class="bp">self</span><span class="p">,</span>
             <span class="o">*</span><span class="p">,</span>
             <span class="n">d_main</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">d_intermidiate</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">d_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
             <span class="n">bias_first</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
             <span class="n">bias_second</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
             <span class="n">dropout_first</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -682,10 +734,10 @@
             <span class="sd">"""Initialize self."""</span>
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">normalization</span> <span class="o">=</span> <span class="n">_make_nn_module</span><span class="p">(</span><span class="n">normalization</span><span class="p">,</span> <span class="n">d_main</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">linear_first</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_main</span><span class="p">,</span> <span class="n">d_intermidiate</span><span class="p">,</span> <span class="n">bias_first</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">linear_first</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_main</span><span class="p">,</span> <span class="n">d_hidden</span><span class="p">,</span> <span class="n">bias_first</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">_make_nn_module</span><span class="p">(</span><span class="n">activation</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dropout_first</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout_first</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">linear_second</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_intermidiate</span><span class="p">,</span> <span class="n">d_main</span><span class="p">,</span> <span class="n">bias_second</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">linear_second</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_hidden</span><span class="p">,</span> <span class="n">d_main</span><span class="p">,</span> <span class="n">bias_second</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dropout_second</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout_second</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">skip_connection</span> <span class="o">=</span> <span class="n">skip_connection</span></div>
 
@@ -734,7 +786,7 @@
         <span class="n">d_in</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">n_blocks</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">d_main</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">d_intermidiate</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">d_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">dropout_first</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">dropout_second</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">normalization</span><span class="p">:</span> <span class="n">ModuleType</span><span class="p">,</span>
@@ -757,7 +809,7 @@
             <span class="o">*</span><span class="p">[</span>
                 <span class="n">ResNet</span><span class="o">.</span><span class="n">Block</span><span class="p">(</span>
                     <span class="n">d_main</span><span class="o">=</span><span class="n">d_main</span><span class="p">,</span>
-                    <span class="n">d_intermidiate</span><span class="o">=</span><span class="n">d_intermidiate</span><span class="p">,</span>
+                    <span class="n">d_hidden</span><span class="o">=</span><span class="n">d_hidden</span><span class="p">,</span>
                     <span class="n">bias_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="n">bias_second</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="n">dropout_first</span><span class="o">=</span><span class="n">dropout_first</span><span class="p">,</span>
@@ -783,7 +835,7 @@
         <span class="o">*</span><span class="p">,</span>
         <span class="n">d_in</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">d_main</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">d_intermidiate</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">d_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">dropout_first</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">dropout_second</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">n_blocks</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -798,7 +850,7 @@
             <span class="n">d_in</span><span class="o">=</span><span class="n">d_in</span><span class="p">,</span>
             <span class="n">n_blocks</span><span class="o">=</span><span class="n">n_blocks</span><span class="p">,</span>
             <span class="n">d_main</span><span class="o">=</span><span class="n">d_main</span><span class="p">,</span>
-            <span class="n">d_intermidiate</span><span class="o">=</span><span class="n">d_intermidiate</span><span class="p">,</span>
+            <span class="n">d_hidden</span><span class="o">=</span><span class="n">d_hidden</span><span class="p">,</span>
             <span class="n">dropout_first</span><span class="o">=</span><span class="n">dropout_first</span><span class="p">,</span>
             <span class="n">dropout_second</span><span class="o">=</span><span class="n">dropout_second</span><span class="p">,</span>
             <span class="n">normalization</span><span class="o">=</span><span class="s1">'BatchNorm1d'</span><span class="p">,</span>
@@ -917,7 +969,7 @@
             <span class="bp">self</span><span class="p">,</span>
             <span class="o">*</span><span class="p">,</span>
             <span class="n">d_token</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">d_intermidiate</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">d_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
             <span class="n">bias_first</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
             <span class="n">bias_second</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
             <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -927,12 +979,12 @@
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">linear_first</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
                 <span class="n">d_token</span><span class="p">,</span>
-                <span class="n">d_intermidiate</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="k">if</span> <span class="n">_is_glu_activation</span><span class="p">(</span><span class="n">activation</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">d_hidden</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="k">if</span> <span class="n">_is_glu_activation</span><span class="p">(</span><span class="n">activation</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span><span class="p">),</span>
                 <span class="n">bias_first</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">_make_nn_module</span><span class="p">(</span><span class="n">activation</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">linear_second</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_intermidiate</span><span class="p">,</span> <span class="n">d_token</span><span class="p">,</span> <span class="n">bias_second</span><span class="p">)</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">linear_second</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_hidden</span><span class="p">,</span> <span class="n">d_token</span><span class="p">,</span> <span class="n">bias_second</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Transformer.FFN.forward"><a class="viewcode-back" href="../../api/rtdl.Transformer.html#rtdl.Transformer.FFN.forward">[docs]</a>        <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
             <span class="sd">"""Perform the forward pass."""</span>
@@ -976,11 +1028,12 @@
         <span class="n">attention_n_heads</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">attention_dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">attention_initialization</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">ffn_d_intermidiate</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">ffn_dropout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">attention_normalization</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ffn_d_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">ffn_dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">ffn_activation</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ffn_normalization</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">residual_dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-        <span class="n">normalization</span><span class="p">:</span> <span class="n">ModuleType</span><span class="p">,</span>
         <span class="n">prenormalization</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
         <span class="n">first_prenormalization</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
         <span class="n">last_layer_query_idx</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">slice</span><span class="p">],</span>
@@ -988,10 +1041,15 @@
         <span class="n">kv_compression_ratio</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
         <span class="n">kv_compression_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
         <span class="n">head_activation</span><span class="p">:</span> <span class="n">ModuleType</span><span class="p">,</span>
+        <span class="n">head_normalization</span><span class="p">:</span> <span class="n">ModuleType</span><span class="p">,</span>
         <span class="n">d_out</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""Initialize self."""</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">prenormalization</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="p">(</span>
+                <span class="ow">not</span> <span class="n">first_prenormalization</span>
+            <span class="p">),</span> <span class="s1">'If `prenormalization` is False, then `first_prenormalization` must be False'</span>
         <span class="n">_all_or_none</span><span class="p">([</span><span class="n">n_tokens</span><span class="p">,</span> <span class="n">kv_compression_ratio</span><span class="p">,</span> <span class="n">kv_compression_sharing</span><span class="p">])</span>
         <span class="k">assert</span> <span class="n">kv_compression_sharing</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">'headwise'</span><span class="p">,</span> <span class="s1">'key-value'</span><span class="p">,</span> <span class="s1">'layerwise'</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">prenormalization</span><span class="p">:</span>
@@ -1004,7 +1062,11 @@
                     <span class="ne">UserWarning</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="k">assert</span> <span class="ow">not</span> <span class="n">first_prenormalization</span>
-        <span class="k">if</span> <span class="n">first_prenormalization</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">WARNINGS</span><span class="p">[</span><span class="s1">'first_prenormalization'</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">prenormalization</span>
+            <span class="ow">and</span> <span class="n">first_prenormalization</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">WARNINGS</span><span class="p">[</span><span class="s1">'first_prenormalization'</span><span class="p">]</span>
+        <span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
                 <span class="s1">'first_prenormalization is set to True. Are you sure about this? '</span>
                 <span class="s1">'For example, the vanilla FTTransformer with '</span>
@@ -1042,7 +1104,7 @@
                     <span class="p">),</span>
                     <span class="s1">'ffn'</span><span class="p">:</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">FFN</span><span class="p">(</span>
                         <span class="n">d_token</span><span class="o">=</span><span class="n">d_token</span><span class="p">,</span>
-                        <span class="n">d_intermidiate</span><span class="o">=</span><span class="n">ffn_d_intermidiate</span><span class="p">,</span>
+                        <span class="n">d_hidden</span><span class="o">=</span><span class="n">ffn_d_hidden</span><span class="p">,</span>
                         <span class="n">bias_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                         <span class="n">bias_second</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                         <span class="n">dropout</span><span class="o">=</span><span class="n">ffn_dropout</span><span class="p">,</span>
@@ -1055,9 +1117,9 @@
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">layer_idx</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">prenormalization</span> <span class="ow">or</span> <span class="n">first_prenormalization</span><span class="p">:</span>
                 <span class="n">layer</span><span class="p">[</span><span class="s1">'attention_normalization'</span><span class="p">]</span> <span class="o">=</span> <span class="n">_make_nn_module</span><span class="p">(</span>
-                    <span class="n">normalization</span><span class="p">,</span> <span class="n">d_token</span>
+                    <span class="n">attention_normalization</span><span class="p">,</span> <span class="n">d_token</span>
                 <span class="p">)</span>
-            <span class="n">layer</span><span class="p">[</span><span class="s1">'ffn_normalization'</span><span class="p">]</span> <span class="o">=</span> <span class="n">_make_nn_module</span><span class="p">(</span><span class="n">normalization</span><span class="p">,</span> <span class="n">d_token</span><span class="p">)</span>
+            <span class="n">layer</span><span class="p">[</span><span class="s1">'ffn_normalization'</span><span class="p">]</span> <span class="o">=</span> <span class="n">_make_nn_module</span><span class="p">(</span><span class="n">ffn_normalization</span><span class="p">,</span> <span class="n">d_token</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">kv_compression_ratio</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_kv_compression</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">layer</span><span class="p">[</span><span class="s1">'key_compression'</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_kv_compression</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">kv_compression_sharing</span> <span class="o">==</span> <span class="s1">'headwise'</span><span class="p">:</span>
@@ -1071,7 +1133,7 @@
             <span class="n">d_out</span><span class="o">=</span><span class="n">d_out</span><span class="p">,</span>
             <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">activation</span><span class="o">=</span><span class="n">head_activation</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
-            <span class="n">normalization</span><span class="o">=</span><span class="n">normalization</span> <span class="k">if</span> <span class="n">prenormalization</span> <span class="k">else</span> <span class="s1">'Identity'</span><span class="p">,</span>
+            <span class="n">normalization</span><span class="o">=</span><span class="n">head_normalization</span> <span class="k">if</span> <span class="n">prenormalization</span> <span class="k">else</span> <span class="s1">'Identity'</span><span class="p">,</span>
         <span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_get_kv_compressions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="p">):</span>
@@ -1152,7 +1214,7 @@
         <span class="k">if</span> <span class="n">transformer</span><span class="o">.</span><span class="n">prenormalization</span><span class="p">:</span>
             <span class="k">assert</span> <span class="s1">'attention_normalization'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">transformer</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">feature_tokenizer</span> <span class="o">=</span> <span class="n">feature_tokenizer</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">append_cls_token</span> <span class="o">=</span> <span class="n">AppendCLSToken</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cls_token</span> <span class="o">=</span> <span class="n">CLSToken</span><span class="p">(</span>
             <span class="n">feature_tokenizer</span><span class="o">.</span><span class="n">d_token</span><span class="p">,</span> <span class="n">feature_tokenizer</span><span class="o">.</span><span class="n">initialization</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span> <span class="n">transformer</span></div>
@@ -1166,7 +1228,8 @@
             <span class="s1">'attention_n_heads'</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
             <span class="s1">'attention_initialization'</span><span class="p">:</span> <span class="s1">'kaiming'</span><span class="p">,</span>
             <span class="s1">'ffn_activation'</span><span class="p">:</span> <span class="s1">'ReGLU'</span><span class="p">,</span>
-            <span class="s1">'normalization'</span><span class="p">:</span> <span class="s1">'LayerNorm'</span><span class="p">,</span>
+            <span class="s1">'attention_normalization'</span><span class="p">:</span> <span class="s1">'LayerNorm'</span><span class="p">,</span>
+            <span class="s1">'ffn_normalization'</span><span class="p">:</span> <span class="s1">'LayerNorm'</span><span class="p">,</span>
             <span class="s1">'prenormalization'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
             <span class="s1">'first_prenormalization'</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
             <span class="s1">'last_layer_query_idx'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
@@ -1174,6 +1237,7 @@
             <span class="s1">'kv_compression_ratio'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
             <span class="s1">'kv_compression_sharing'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
             <span class="s1">'head_activation'</span><span class="p">:</span> <span class="s1">'ReLU'</span><span class="p">,</span>
+            <span class="s1">'head_normalization'</span><span class="p">:</span> <span class="s1">'LayerNorm'</span><span class="p">,</span>
         <span class="p">}</span></div>
 
 <div class="viewcode-block" id="FTTransformer.get_default_transformer_config"><a class="viewcode-back" href="../../api/rtdl.FTTransformer.html#rtdl.FTTransformer.get_default_transformer_config">[docs]</a>    <span class="nd">@classmethod</span>
@@ -1191,15 +1255,13 @@
         <span class="n">baseline_subconfig</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_baseline_transformer_subconfig</span><span class="p">()</span>
         <span class="c1"># (4 / 3) for xGLU activations results in almost the same parameter count</span>
         <span class="c1"># as (2.0) for element-wise activations (e.g. ReLU; see the "else" branch)</span>
-        <span class="n">ffn_d_intermidiate_factor</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">ffn_d_hidden_factor</span> <span class="o">=</span> <span class="p">(</span>
             <span class="p">(</span><span class="mi">4</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="k">if</span> <span class="n">_is_glu_activation</span><span class="p">(</span><span class="n">baseline_subconfig</span><span class="p">[</span><span class="s1">'ffn_activation'</span><span class="p">])</span> <span class="k">else</span> <span class="mf">2.0</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s1">'n_blocks'</span><span class="p">:</span> <span class="n">n_blocks</span><span class="p">,</span>
             <span class="s1">'residual_dropout'</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
-            <span class="s1">'ffn_d_intermidiate'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span>
-                <span class="n">arch_subconfig</span><span class="p">[</span><span class="s1">'d_token'</span><span class="p">]</span> <span class="o">*</span> <span class="n">ffn_d_intermidiate_factor</span>
-            <span class="p">),</span>
+            <span class="s1">'ffn_d_hidden'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">arch_subconfig</span><span class="p">[</span><span class="s1">'d_token'</span><span class="p">]</span> <span class="o">*</span> <span class="n">ffn_d_hidden_factor</span><span class="p">),</span>
             <span class="o">**</span><span class="n">arch_subconfig</span><span class="p">,</span>
             <span class="o">**</span><span class="n">baseline_subconfig</span><span class="p">,</span>
         <span class="p">}</span></div>
@@ -1234,8 +1296,8 @@
         <span class="n">d_token</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">n_blocks</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">attention_dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-        <span class="n">ffn_d_intermidiate</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">ffn_dropout</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">ffn_d_hidden</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">ffn_dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">residual_dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">last_layer_query_idx</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">slice</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">kv_compression_ratio</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1250,8 +1312,9 @@
         <span class="n">transformer_config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_baseline_transformer_subconfig</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">arg_name</span> <span class="ow">in</span> <span class="p">[</span>
             <span class="s1">'n_blocks'</span><span class="p">,</span>
+            <span class="s1">'d_token'</span><span class="p">,</span>
             <span class="s1">'attention_dropout'</span><span class="p">,</span>
-            <span class="s1">'ffn_d_intermidiate'</span><span class="p">,</span>
+            <span class="s1">'ffn_d_hidden'</span><span class="p">,</span>
             <span class="s1">'ffn_dropout'</span><span class="p">,</span>
             <span class="s1">'residual_dropout'</span><span class="p">,</span>
             <span class="s1">'last_layer_query_idx'</span><span class="p">,</span>
@@ -1276,7 +1339,7 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FTTransformer'</span><span class="p">:</span>
         <span class="sd">"""Create the default `FTTransformer`.</span>
 
-<span class="sd">        With :code:`n_blocks=3` (default) it is the FT-Transformer variation that</span>
+<span class="sd">        With :code:`n_blocks=3` (default) it is the FT-Transformer variation that is</span>
 <span class="sd">        referred to as "default FT-Transformer" in the original paper.</span>
 
 <span class="sd">        Note:</span>
@@ -1340,7 +1403,7 @@
 <div class="viewcode-block" id="FTTransformer.forward"><a class="viewcode-back" href="../../api/rtdl.FTTransformer.html#rtdl.FTTransformer.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_num</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">x_cat</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
         <span class="sd">"""Perform the forward pass."""</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_tokenizer</span><span class="p">(</span><span class="n">x_num</span><span class="p">,</span> <span class="n">x_cat</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">append_cls_token</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cls_token</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span></div></div>
 </pre></div>
