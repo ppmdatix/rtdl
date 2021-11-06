@@ -47,13 +47,17 @@
   
   
   
-    <title>rtdl.CLSToken &#8212; rtdl 0.0.8.dev0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/material.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <title>rtdl.CLSToken &#8212; rtdl 0.0.9.dev0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="rtdl.MultiheadAttention" href="rtdl.MultiheadAttention.html" />
@@ -81,7 +85,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../index.html" title="rtdl 0.0.8.dev0 documentation"
+        <a href="../index.html" title="rtdl 0.0.9.dev0 documentation"
            class="md-header-nav__button md-logo">
           
             <i class="md-icon">&#127968;</i>
@@ -93,7 +97,7 @@
       </div>
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          <span class="md-header-nav__topic">rtdl 0.0.8.dev0</span>
+          <span class="md-header-nav__topic">rtdl 0.0.9.dev0</span>
           <span class="md-header-nav__topic"> rtdl.CLSToken </span>
         </div>
       </div>
@@ -103,7 +107,7 @@
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
-    <form class="md-search__form" action="../search.html" method="GET" name="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
       <input type="text" class="md-search__input" name="q" placeholder="Search"
              autocapitalize="off" autocomplete="off" spellcheck="false"
              data-md-component="query" data-md-state="active">
@@ -179,13 +183,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../index.html" title="rtdl 0.0.8.dev0 documentation" class="md-nav__button md-logo">
+    <a href="../index.html" title="rtdl 0.0.9.dev0 documentation" class="md-nav__button md-logo">
       
         <i class="md-icon">&#127968;</i>
       
     </a>
     <a href="../index.html"
-       title="rtdl 0.0.8.dev0 documentation">rtdl 0.0.8.dev0</a>
+       title="rtdl 0.0.9.dev0 documentation">rtdl 0.0.9.dev0</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/yandex-research/rtdl" title="Go to repository" class="md-source" data-md-source="github">
@@ -283,12 +287,13 @@
   
 <h1 id="api-rtdl-clstoken--page-root">rtdl.CLSToken<a class="headerlink" href="#api-rtdl-clstoken--page-root" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="rtdl.CLSToken">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">rtdl.</span></code><code class="sig-name descname"><span class="pre">CLSToken</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#CLSToken"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.CLSToken" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="rtdl.CLSToken">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">rtdl.</span></span><span class="sig-name descname"><span class="pre">CLSToken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#CLSToken"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.CLSToken" title="Permalink to this definition">¶</a></dt>
 <dd><p>[CLS]-token for BERT-like inference.</p>
-<p class="rubric">Tutorial</p>
+<p>To learn about the [CLS]-based inference, see [devlin2018bert].</p>
 <p>When used as a module, the [CLS]-token is appended <strong>to the end</strong> of each item in
-the batch:</p>
+the batch.</p>
+<p class="rubric">Examples</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">n_tokens</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">d_token</span> <span class="o">=</span> <span class="mi">4</span>
@@ -299,58 +304,51 @@ the batch:</p>
 <span class="k">assert</span> <span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">==</span> <span class="n">cls_token</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </pre></div>
 </div>
-<dl class="py method">
-<dt id="rtdl.CLSToken.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialization</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#CLSToken.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.CLSToken.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>[devlin2018bert] Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova “BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding” 2018</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p></li>
-<li><p><strong>initialization</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+<li><p><strong>d_token</strong> – the size of token</p></li>
+<li><p><strong>initialization</strong> – initialization policy for parameters. Must be one of
+<code class="code docutils literal notranslate"><span class="pre">['uniform',</span> <span class="pre">'normal']</span></code>. Let <code class="code docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">d</span> <span class="pre">**</span> <span class="pre">-0.5</span></code>. Then, the
+corresponding distributions are <code class="code docutils literal notranslate"><span class="pre">Uniform(-s,</span> <span class="pre">s)</span></code> and <code class="code docutils literal notranslate"><span class="pre">Normal(0,</span> <span class="pre">s)</span></code>. In
+the paper [gorishniy2021revisiting], the ‘uniform’ initialization was
+used.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a></p>
-</dd>
 </dl>
-</dd></dl>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>[gorishniy2021revisiting] Yury Gorishniy, Ivan Rubachev, Valentin Khrulkov, Artem Babenko “Revisiting Deep Learning Models for Tabular Data”, 2021</p></li>
+</ul>
 <dl class="py method">
-<dt id="rtdl.CLSToken.expand">
-<code class="sig-name descname"><span class="pre">expand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">leading_dimensions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#CLSToken.expand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.CLSToken.expand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="rtdl.CLSToken.expand">
+<span class="sig-name descname"><span class="pre">expand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">leading_dimensions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><span class="pre">torch.Tensor</span></a></span></span><a class="reference internal" href="../_modules/rtdl/modules.html#CLSToken.expand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.CLSToken.expand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Expand (repeat) the underlying [CLS]-token to a tensor with the given leading dimensions.</p>
 <p>A possible use case is building a batch of [CLS]-tokens. See <a class="reference internal" href="#rtdl.CLSToken" title="rtdl.CLSToken"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CLSToken</span></code></a> for
 examples of usage.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Under the hood, the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.Tensor.expand.html#torch.Tensor.expand" title="(in PyTorch v1.9.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor.expand</span></code></a> method is applied to the
+<p>Under the hood, the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.Tensor.expand.html#torch.Tensor.expand" title="(in PyTorch v1.10.0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.Tensor.expand</span></code></a> method is applied to the
 underlying <code class="code docutils literal notranslate"><span class="pre">weight</span></code> parameter, so gradients will be propagated as
 expected.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>leading_dimensions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the additional new dimensions</p>
+<dd class="field-odd"><p><strong>leading_dimensions</strong> – the additional new dimensions</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>tensor of the shape <code class="code docutils literal notranslate"><span class="pre">(*leading_dimensions,</span> <span class="pre">len(self.weight))</span></code></p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.1)">torch.Tensor</a></p>
-</dd>
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="rtdl.CLSToken.forward">
-<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#CLSToken.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.CLSToken.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="rtdl.CLSToken.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><span class="pre">torch.Tensor</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.10.0)"><span class="pre">torch.Tensor</span></a></span></span><a class="reference internal" href="../_modules/rtdl/modules.html#CLSToken.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.CLSToken.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Append self <strong>to the end</strong> of each item in the batch (see <a class="reference internal" href="#rtdl.CLSToken" title="rtdl.CLSToken"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CLSToken</span></code></a>).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.1)"><em>torch.Tensor</em></a>) – </p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.1)">torch.Tensor</a></p>
-</dd>
-</dl>
 </dd></dl>
 </dd></dl>
 
@@ -375,7 +373,7 @@ expected.</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

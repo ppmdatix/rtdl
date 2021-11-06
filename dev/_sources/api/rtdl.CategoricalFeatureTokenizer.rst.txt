@@ -4,5 +4,4 @@
 .. currentmodule:: rtdl
 
 .. autoclass:: CategoricalFeatureTokenizer
-   :special-members: __init__
    :members:

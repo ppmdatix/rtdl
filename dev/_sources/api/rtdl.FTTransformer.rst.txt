@@ -4,5 +4,4 @@
 .. currentmodule:: rtdl
 
 .. autoclass:: FTTransformer
-   :special-members: __init__
    :members:

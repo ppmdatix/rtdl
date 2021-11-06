@@ -47,13 +47,17 @@
   
   
   
-    <title>rtdl.Transformer &#8212; rtdl 0.0.8.dev0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/material.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <title>rtdl.Transformer &#8212; rtdl 0.0.9.dev0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="rtdl.FTTransformer" href="rtdl.FTTransformer.html" />
@@ -81,7 +85,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../index.html" title="rtdl 0.0.8.dev0 documentation"
+        <a href="../index.html" title="rtdl 0.0.9.dev0 documentation"
            class="md-header-nav__button md-logo">
           
             <i class="md-icon">&#127968;</i>
@@ -93,7 +97,7 @@
       </div>
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          <span class="md-header-nav__topic">rtdl 0.0.8.dev0</span>
+          <span class="md-header-nav__topic">rtdl 0.0.9.dev0</span>
           <span class="md-header-nav__topic"> rtdl.Transformer </span>
         </div>
       </div>
@@ -103,7 +107,7 @@
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
-    <form class="md-search__form" action="../search.html" method="GET" name="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
       <input type="text" class="md-search__input" name="q" placeholder="Search"
              autocapitalize="off" autocomplete="off" spellcheck="false"
              data-md-component="query" data-md-state="active">
@@ -179,13 +183,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../index.html" title="rtdl 0.0.8.dev0 documentation" class="md-nav__button md-logo">
+    <a href="../index.html" title="rtdl 0.0.9.dev0 documentation" class="md-nav__button md-logo">
       
         <i class="md-icon">&#127968;</i>
       
     </a>
     <a href="../index.html"
-       title="rtdl 0.0.8.dev0 documentation">rtdl 0.0.8.dev0</a>
+       title="rtdl 0.0.9.dev0 documentation">rtdl 0.0.9.dev0</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/yandex-research/rtdl" title="Go to repository" class="md-source" data-md-source="github">
@@ -283,125 +287,19 @@
   
 <h1 id="api-rtdl-transformer--page-root">rtdl.Transformer<a class="headerlink" href="#api-rtdl-transformer--page-root" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="rtdl.Transformer">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">rtdl.</span></code><code class="sig-name descname"><span class="pre">Transformer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_blocks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_n_heads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_initialization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_normalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_d_hidden</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_activation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_normalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residual_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prenormalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_prenormalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_layer_query_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_sharing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_activation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_normalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer" title="Permalink to this definition">¶</a></dt>
-<dd><p>The vanilla Transformer with extra features.</p>
+<dt class="sig sig-object py" id="rtdl.Transformer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">rtdl.</span></span><span class="sig-name descname"><span class="pre">Transformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_blocks</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_n_heads</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_dropout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_initialization</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_normalization</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_d_hidden</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_dropout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_activation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_normalization</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">residual_dropout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">prenormalization</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_prenormalization</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_layer_query_idx</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#slice" title="(in Python v3.10)"><span class="pre">slice</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_tokens</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_ratio</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_sharing</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_activation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.nn.modules.module.Module</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_normalization</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.nn.modules.module.Module</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_out</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transformer with extra features.</p>
 <p>This module is the backbone of <a class="reference internal" href="rtdl.FTTransformer.html#rtdl.FTTransformer" title="rtdl.FTTransformer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FTTransformer</span></code></a>.</p>
 <dl class="py class">
-<dt id="rtdl.Transformer.FFN">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">FFN</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_hidden</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias_first</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias_second</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer.FFN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer.FFN" title="Permalink to this definition">¶</a></dt>
-<dd><p>The Feed-Forward Network module used in every Transformer block.</p>
-<dl class="py method">
-<dt id="rtdl.Transformer.FFN.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_hidden</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias_first</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias_second</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer.FFN.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer.FFN.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>d_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p></li>
-<li><p><strong>d_hidden</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p></li>
-<li><p><strong>bias_first</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – </p></li>
-<li><p><strong>bias_second</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – </p></li>
-<li><p><strong>dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
-<li><p><strong>activation</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>Callable</em><em>[</em><em>[</em><em>..</em><em>]</em><em>, </em><em>torch.nn.modules.module.Module</em><em>]</em><em>]</em>) – </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py method">
-<dt id="rtdl.Transformer.FFN.forward">
-<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer.FFN.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer.FFN.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the forward pass.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.1)"><em>torch.Tensor</em></a>) – </p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.1)">torch.Tensor</a></p>
-</dd>
-</dl>
-</dd></dl>
+<dt class="sig sig-object py" id="rtdl.Transformer.FFN">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">FFN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_hidden</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias_first</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias_second</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.nn.modules.module.Module</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer.FFN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer.FFN" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Feed-Forward Network module used in every <a class="reference internal" href="#rtdl.Transformer" title="rtdl.Transformer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Transformer</span></code></a> block.</p>
 </dd></dl>
 <dl class="py class">
-<dt id="rtdl.Transformer.Head">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Head</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer.Head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer.Head" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="rtdl.Transformer.Head">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_in</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.nn.modules.module.Module</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">torch.nn.modules.module.Module</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_out</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer.Head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer.Head" title="Permalink to this definition">¶</a></dt>
 <dd><p>The final module of the <a class="reference internal" href="#rtdl.Transformer" title="rtdl.Transformer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Transformer</span></code></a> that performs BERT-like inference.</p>
-<dl class="py method">
-<dt id="rtdl.Transformer.Head.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer.Head.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer.Head.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>d_in</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p></li>
-<li><p><strong>bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – </p></li>
-<li><p><strong>activation</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>Callable</em><em>[</em><em>[</em><em>..</em><em>]</em><em>, </em><em>torch.nn.modules.module.Module</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>normalization</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>Callable</em><em>[</em><em>[</em><em>..</em><em>]</em><em>, </em><em>torch.nn.modules.module.Module</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>d_out</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py method">
-<dt id="rtdl.Transformer.Head.forward">
-<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer.Head.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer.Head.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the forward pass.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.1)"><em>torch.Tensor</em></a>) – </p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.1)">torch.Tensor</a></p>
-</dd>
-</dl>
-</dd></dl>
-</dd></dl>
-<dl class="py method">
-<dt id="rtdl.Transformer.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_blocks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_n_heads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_initialization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_normalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_d_hidden</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_activation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffn_normalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residual_dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prenormalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_prenormalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_layer_query_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv_compression_sharing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_activation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_normalization</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>d_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p></li>
-<li><p><strong>n_blocks</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p></li>
-<li><p><strong>attention_n_heads</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p></li>
-<li><p><strong>attention_dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
-<li><p><strong>attention_initialization</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
-<li><p><strong>attention_normalization</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
-<li><p><strong>ffn_d_hidden</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p></li>
-<li><p><strong>ffn_dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
-<li><p><strong>ffn_activation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
-<li><p><strong>ffn_normalization</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
-<li><p><strong>residual_dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
-<li><p><strong>prenormalization</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – </p></li>
-<li><p><strong>first_prenormalization</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – </p></li>
-<li><p><strong>last_layer_query_idx</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em>, </em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#slice" title="(in Python v3.10)"><em>slice</em></a><em>]</em>) – </p></li>
-<li><p><strong>n_tokens</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>]</em>) – </p></li>
-<li><p><strong>kv_compression_ratio</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – </p></li>
-<li><p><strong>kv_compression_sharing</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – </p></li>
-<li><p><strong>head_activation</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>Callable</em><em>[</em><em>[</em><em>..</em><em>]</em><em>, </em><em>torch.nn.modules.module.Module</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>head_normalization</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>Callable</em><em>[</em><em>[</em><em>..</em><em>]</em><em>, </em><em>torch.nn.modules.module.Module</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>d_out</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a></p>
-</dd>
-</dl>
-</dd></dl>
-<dl class="py method">
-<dt id="rtdl.Transformer.forward">
-<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rtdl/modules.html#Transformer.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rtdl.Transformer.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the forward pass.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.1)"><em>torch.Tensor</em></a>) – </p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.9.1)">torch.Tensor</a></p>
-</dd>
-</dl>
 </dd></dl>
 </dd></dl>
 
@@ -426,7 +324,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

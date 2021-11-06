@@ -4,5 +4,4 @@
 .. currentmodule:: rtdl
 
 .. autoclass:: CLSToken
-   :special-members: __init__
    :members:
