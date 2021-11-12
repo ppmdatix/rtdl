@@ -501,6 +501,7 @@ class MLP(nn.Module):
         dropouts: Union[float, List[float]],
         activation: Union[str, Callable[[], nn.Module]],
         d_out: int,
+        seed: None
     ) -> None:
         """
         Note:
@@ -510,7 +511,8 @@ class MLP(nn.Module):
         if isinstance(dropouts, float):
             dropouts = [dropouts] * len(d_layers)
         assert len(d_layers) == len(dropouts)
-
+        if not seed is None:
+            torch.manual_seed(seed)
         self.blocks = nn.Sequential(
             *[
                 MLP.Block(
@@ -532,6 +534,7 @@ class MLP(nn.Module):
         d_layers: List[int],
         dropout: float,
         d_out: int,
+        seed: None
     ) -> 'MLP':
         """Create a "baseline" `MLP`.
 
@@ -550,6 +553,7 @@ class MLP(nn.Module):
                 example: :code:`[1, 2, 3, 4]`.
             dropout: the dropout rate for all hidden layers
             d_out: the output size
+            seed: optional random seed
         Returns:
             MLP
 
@@ -568,6 +572,7 @@ class MLP(nn.Module):
             dropouts=dropout,
             activation='ReLU',
             d_out=d_out,
+            seed=seed
         )
 
     def forward(self, x: Tensor) -> Tensor:

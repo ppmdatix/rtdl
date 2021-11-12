@@ -238,6 +238,17 @@ for epoch in stream.epochs(args['training']['n_epochs']):
             Y_device[lib.TRAIN][batch_idx],
         )
         loss.backward()
+
+        factors = dict()
+
+
+        for name, param in model.named_parameters():
+            if param.requires_grad:
+                factor = batch_size / (1.0 * factors[name])
+                param.grad = factor * param.grad
+
+
+
         optimizer.step()
         epoch_losses.append(loss.detach())
     epoch_losses = torch.stack(epoch_losses).tolist()
