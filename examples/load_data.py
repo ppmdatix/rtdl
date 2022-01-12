@@ -71,5 +71,5 @@ def load_data(path, filename, target_name="target", task_type="multiclass"):
     if task_type != 'multiclass':
         y = {k: v.float() for k, v in y.items()}
 
-    return X, y, old_x
+    return X, y, old_x, X_all, y_std
 

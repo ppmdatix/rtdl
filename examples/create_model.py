@@ -46,7 +46,8 @@ def create_model(X_all, n_classes=None, task_type="regression", model_name="mlp"
         else torch.optim.Adam(_model.parameters(), lr=lr, weight_decay=weight_decay)
     )
     loss_fn = (
-        F.binary_cross_entropy_with_logits
+        F.mse_loss
+        # F.binary_cross_entropy_with_logits
         if task_type == 'binclass'
         else F.cross_entropy
         if task_type == 'multiclass'
