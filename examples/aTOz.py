@@ -11,12 +11,15 @@ task_type  = sys.argv[2]
 epochs     = int(sys.argv[3])
 batch_size = int(sys.argv[4])
 
+target_name = "target"  
+if len(sys.argv) > 5:
+    target_name = sys.argv[5]
 
-X, y, old_x, X_all, y_std = load_data("data/", dataset  +".csv", task_type=task_type)
+X, y, old_x, X_all, y_std = load_data("examples/data/", dataset  +".csv", task_type=task_type, target_name=target_name)
 model, optimizer, loss_fn = create_model(X_all, task_type=task_type)
 
 for relational_batch in [True, False]:
-    save_path = create_path("results/" + dataset, epochs, batch_size, relational_batch)
+    save_path = create_path("examples/results/" + dataset, epochs, batch_size, relational_batch)
     losses = learn_that(
                 model, 
                 optimizer, 

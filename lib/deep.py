@@ -27,7 +27,7 @@ class IndexLoader:
 
     def __iter__(self):
         indices = list(
-            zero.iloader(self._train_size, self._batch_size, shuffle=self._shuffle)
+            zero.data.iloader(self._train_size, self._batch_size, shuffle=self._shuffle)
         )
         return iter(torch.cat(indices).to(self._device).split(self._batch_size))
 

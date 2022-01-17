@@ -9,12 +9,21 @@ import sklearn.model_selection
 import sklearn.preprocessing
 import torch
 import zero
+
+import os
+import sys
+
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, '/Users/ppx/Desktop/PhD/rtdl')
+
+from lib.deep import IndexLoader
 import pandas as pd
+
 
 
 device = torch.device('cpu')
 
-progress = zero.ProgressTracker(patience=100)
 
 def apply_model(x_num, x_cat=None, model=None):
     if isinstance(model, rtdl.FTTransformer):
@@ -33,8 +42,17 @@ def apply_model(x_num, x_cat=None, model=None):
 def evaluate(part, model, X, y, y_std, task_type="regression"):
     model.eval()
     prediction = []
-    for batch in zero.iter_batches(X[part], 1024):
-        prediction.append(apply_model(batch, model=model))
+
+    batch_size = 1024
+    permutation = torch.randperm(X[part].size()[0])
+
+    for iteration in range(0, X[part].size()[0], batch_size):
+
+        batch_idx = permutation[iteration:iteration + batch_size]
+
+        x_batch = X[part][batch_idx]
+
+        prediction.append(apply_model(x_batch, model=model))
     prediction = torch.cat(prediction).squeeze(1).cpu().numpy()
     target = y[part].cpu().numpy()
 
@@ -53,21 +71,29 @@ def evaluate(part, model, X, y, y_std, task_type="regression"):
 def learn_that(_model, _optimizer, _loss_fn, _X, _y, y_std, _epochs, _batch_size, _relational_batch, _old_X, print_mode=False, _task_type="regression"):
     # Docs: https://yura52.github.io/zero/reference/api/zero.data.IndexLoader.html
     batch_size = 256
-    train_loader = zero.data.IndexLoader(len(_X['train']), batch_size, device=device)
-
-    # Create a progress tracker for early stopping
-    # Docs: https://yura52.github.io/zero/reference/api/zero.ProgressTracker.html
-    _progress = zero.ProgressTracker(patience=100)
+    train_loader = IndexLoader(len(_X['train']), batch_size, device=device, shuffle=False)
 
     if print_mode:
         print(f'Test score before training: {evaluate("test", _model):.4f}')
+
+
+
 
     report_frequency = len(_X['train']) // _batch_size // 5
     losses = dict()
     losses['val'] = []
     losses['test'] = []
     for epoch in range(1, _epochs + 1):
-        for iteration, batch_idx in enumerate(train_loader):
+
+        # X is a torch Variable
+        permutation = torch.randperm(_X['train'].size()[0])
+
+        for iteration in range(0, _X['train'].size()[0], batch_size):
+
+            batch_idx = permutation[iteration:iteration + batch_size]
+            # x_batch, y_batch = _X['train'][batch_idx], _y['train'][batch_idx]
+
+        #for iteration, batch_idx in enumerate(train_loader):
             _model.train()
             _optimizer.zero_grad()
             x_batch = _X['train'][batch_idx]
@@ -109,11 +135,5 @@ def learn_that(_model, _optimizer, _loss_fn, _X, _y, y_std, _epochs, _batch_size
 
         val_score  = evaluate("val", _model, _X, _y, y_std, task_type=_task_type)
         test_score = evaluate("test", _model, _X, _y, y_std, task_type=_task_type)
-        _progress.update((-1 if _task_type == 'regression' else 1) * val_score)
-        if _progress.fail:
-            break
-        if print_mode:
-            print(f'Epoch {epoch:03d} | Validation score: {val_score:.4f} | Test score: {test_score:.4f}', end='')
-            if _progress.success and print_mode:
-                print(' <<< BEST VALIDATION EPOCH', end='')
+
     return losses

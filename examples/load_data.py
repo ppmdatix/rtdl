@@ -30,7 +30,7 @@ def load_data(path, filename, target_name="target", task_type="multiclass"):
     for t in target:
         result.append(target_mapping[t])
 
-    df_format = {"target": pd.DataFrame(result).values.reshape(df.shape[0]), "data": df.drop("target", axis=1),
+    df_format = {"target": pd.DataFrame(result).values.reshape(df.shape[0]), "data": df.drop(target_name, axis=1),
                  "frame": None, "DESCR": "Todo", "feature_names": []}
 
     assert task_type in ['binclass', 'multiclass', 'regression']
