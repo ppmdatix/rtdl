@@ -147,7 +147,6 @@ docs/api
 data
 **/catboost_cached_datasets/**
 *.bin
-*.csv
 *.cbm
 *.npy
 *.pickle

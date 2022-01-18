@@ -16,9 +16,9 @@ if len(sys.argv) > 5:
     target_name = sys.argv[5]
 
 X, y, old_x, X_all, y_std = load_data("examples/data/", dataset  +".csv", task_type=task_type, target_name=target_name)
-model, optimizer, loss_fn = create_model(X_all, task_type=task_type)
 
 for relational_batch in [True, False]:
+    model, optimizer, loss_fn = create_model(X_all, task_type=task_type)
     save_path = create_path("examples/results/" + dataset, epochs, batch_size, relational_batch)
     losses = learn_that(
                 model, 
@@ -33,7 +33,8 @@ for relational_batch in [True, False]:
                 old_x, 
                 print_mode=False, 
                 _task_type=task_type)
-    plot_losses(losses, path=save_path)
+    title = dataset + "-relationalBatch:" + str(relational_batch)
+    plot_losses(losses, title=title, path=save_path)
     
     df = pd.DataFrame(losses)
     
