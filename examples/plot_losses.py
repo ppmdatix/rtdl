@@ -10,6 +10,7 @@ def create_path(data_path, e, bs, rb):
 
     return result
 
+
 def plot_losses(_losses, title="this is a graph", path=None, print_mode=False):
     for key in _losses:
         plt.plot([np.log(x) for x in _losses[key]], label=key)
