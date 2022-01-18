@@ -4,20 +4,26 @@ import sys
 from one_hot_encode import one_hot_encode
 
 
-directory = "examples/data/" + sys.argv[1] + "/"
-filename = sys.argv[2]
-category_features_file = sys.argv[3]
+directory = sys.argv[1]
+dataset = sys.argv[2]
 
-if len(sys.argv) > 4:
-    target = sys.argv[4]
+if dataset.lower() == "kdd":
+    path = directory + "fetch_kddcup99.csv"
+    target = "labels"
+elif dataset.lower() == "forest_cover":
+    path = directory + "forest_cover.csv"
+    target = "Cover_Type"
+
 else:
-    target = "target"
+    raise Exception('no such dataset')
+category_features_file = "categorical_features.csv"
+
 
 with open(directory + category_features_file, newline='') as f:
     reader = csv.reader(f)
     cat_feat = list(reader)[0]
 
-df = pd.read_csv(directory + filename)
+df = pd.read_csv(path)
 df["target"] = df[target]
 df = df.drop(target, axis=1)
 oldNames = df.columns
