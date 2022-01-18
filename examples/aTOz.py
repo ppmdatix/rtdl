@@ -15,10 +15,17 @@ target_name = "target"
 if len(sys.argv) > 5:
     target_name = sys.argv[5]
 
-X, y, old_x, X_all, y_std = load_data("examples/data/", dataset  +".csv", task_type=task_type, target_name=target_name)
+X, y, old_x, X_all, y_std, target_values = load_data("examples/data/", dataset  +".csv", task_type=task_type, target_name=target_name)
 
 for relational_batch in [True, False]:
-    model, optimizer, loss_fn = create_model(X_all, task_type=task_type)
+
+    if task_type=="multiclass":
+        n_classes = len(target_values)
+    else:
+        n_classes = None
+
+
+    model, optimizer, loss_fn = create_model(X_all, n_classes=n_classes, task_type=task_type)
     save_path = create_path("examples/results/" + dataset, epochs, batch_size, relational_batch)
     losses = learn_that(
                 model, 

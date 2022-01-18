@@ -6,7 +6,10 @@ device = torch.device('cpu')
 
 
 def create_model(X_all, n_classes=None, task_type="regression", model_name="mlp"):
-    d_out = n_classes or 1
+    if task_type == "multiclass":
+        d_out = n_classes
+    else:
+        d_out = n_classes or 1
 
     lr = 0.001
     weight_decay = 0.0
